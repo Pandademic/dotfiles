@@ -5,4 +5,4 @@ linux:
         name: "nvimrc"
         location: ~/.config/nvim/init.lua
         comment: "My neovim config , which insn't very elaborate(anymore) , since I now use emacs"
-     - 
+     
