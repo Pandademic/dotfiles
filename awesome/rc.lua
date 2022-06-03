@@ -1,3 +1,16 @@
+--
+--▄▄▄█████▓ ██░ ██ ▓█████     ███▄ ▄███▓ ▄▄▄       ██▓ ███▄    █     ▄████▄   ▒█████   ███▄    █   █████▒██▓  ▄████      █████▒██▓ ██▓    ▓█████ 
+--▓  ██▒ ▓▒▓██░ ██▒▓█   ▀    ▓██▒▀█▀ ██▒▒████▄    ▓██▒ ██ ▀█   █    ▒██▀ ▀█  ▒██▒  ██▒ ██ ▀█   █ ▓██   ▒▓██▒ ██▒ ▀█▒   ▓██   ▒▓██▒▓██▒    ▓█   ▀ 
+--▒ ▓██░ ▒░▒██▀▀██░▒███      ▓██    ▓██░▒██  ▀█▄  ▒██▒▓██  ▀█ ██▒   ▒▓█    ▄ ▒██░  ██▒▓██  ▀█ ██▒▒████ ░▒██▒▒██░▄▄▄░   ▒████ ░▒██▒▒██░    ▒███   
+--░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄    ▒██    ▒██ ░██▄▄▄▄██ ░██░▓██▒  ▐▌██▒   ▒▓▓▄ ▄██▒▒██   ██░▓██▒  ▐▌██▒░▓█▒  ░░██░░▓█  ██▓   ░▓█▒  ░░██░▒██░    ▒▓█  ▄ 
+--  ▒██▒ ░ ░▓█▒░██▓░▒████▒   ▒██▒   ░██▒ ▓█   ▓██▒░██░▒██░   ▓██░   ▒ ▓███▀ ░░ ████▓▒░▒██░   ▓██░░▒█░   ░██░░▒▓███▀▒   ░▒█░   ░██░░██████▒░▒████▒
+--  ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░   ░ ▒░   ░  ░ ▒▒   ▓▒█░░▓  ░ ▒░   ▒ ▒    ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ▒ ▒  ▒ ░   ░▓   ░▒   ▒     ▒ ░   ░▓  ░ ▒░▓  ░░░ ▒░ ░
+--    ░     ▒ ░▒░ ░ ░ ░  ░   ░  ░      ░  ▒   ▒▒ ░ ▒ ░░ ░░   ░ ▒░     ░  ▒     ░ ▒ ▒░ ░ ░░   ░ ▒░ ░      ▒ ░  ░   ░     ░      ▒ ░░ ░ ▒  ░ ░ ░  ░
+--  ░       ░  ░░ ░   ░      ░      ░     ░   ▒    ▒ ░   ░   ░ ░    ░        ░ ░ ░ ▒     ░   ░ ░  ░ ░    ▒ ░░ ░   ░     ░ ░    ▒ ░  ░ ░      ░   
+--          ░  ░  ░   ░  ░          ░         ░  ░ ░           ░    ░ ░          ░ ░           ░         ░        ░            ░      ░  ░   ░  ░
+--                                                                 ░                                                                            
+
+
 -- If LuaRocks is installed, make sure that packages installed through it are found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
@@ -17,8 +30,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- Load Debian menu entries ( my linux boxis raspberry pi os)
-local debian = require("debian.menu")
+-- Load Debian menu entries ( If they exist)
+local debian = pcall(require,"debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 
@@ -61,8 +74,8 @@ modkey = "Mod4"
 
 -- all possible layouts:
 awful.layout.layouts = {
+    awful.layout.suit.tile, -- default one
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
