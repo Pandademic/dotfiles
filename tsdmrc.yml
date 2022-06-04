@@ -9,7 +9,11 @@ linux:
      - awesome/rc.lua:
         name: "main awesome rc file"
         location: ~/.config/awesome/rc.lua
-        comment: "My config for awesomewm , which requires some prequisistes"
+        comment: "My main config for awesomewm , which requires some prequisistes"
+     - awesome/keybindings.lua:  
+        name: "awesome keybindings file"
+        location: ~/.config/awesome/keybindings.lua
+        
 # mac , which for the most part , is identical to linux
 
 darwin:
