@@ -14,6 +14,8 @@ local awful = require("awful")
 local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
+modkey = "Mod4"
+
 globalkeys = gears.table.join(
     awful.key({"Mod4"},"Left", function()
         awful.client.focus.bydirection("left")
