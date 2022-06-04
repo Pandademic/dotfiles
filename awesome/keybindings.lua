@@ -12,6 +12,7 @@
 
 local awful = require("awful")
 local gears = require("gears")
+local hotkeys_popup = require("awful.hotkeys_popup")
 
 globalkeys = gears.table.join(
     awful.key({"Mod4"},"Left", function()
