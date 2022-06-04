@@ -11,6 +11,7 @@
 --              ░ ░           ░                                 
 
 local awful = require("awful")
+local gears = require("gears")
 
 globalkeys = gears.table.join(
     awful.key({"Mod4"},"Left", function()
