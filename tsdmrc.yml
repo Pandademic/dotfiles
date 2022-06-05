@@ -13,7 +13,10 @@ linux:
      - awesome/keybindings.lua:  
         name: "awesome keybindings file"
         location: ~/.config/awesome/keybindings.lua
-        
+     - picom.conf:
+        name: "Picom config"
+        location: ~/.config/picom.conf
+        comment: "Note: I use the ibhagwan fork"
 # mac , which for the most part , is identical to linux
 
 darwin:
