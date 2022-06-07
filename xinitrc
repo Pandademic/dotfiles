@@ -1,0 +1,3 @@
+exec awesome
+
+exec picom &
