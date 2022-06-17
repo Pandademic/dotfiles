@@ -1,3 +1,8 @@
-exec awesome
+#!/bin/sh
+#
+# ~/.xinitrc :
+
 
 exec picom &
+
+exec awesome 
