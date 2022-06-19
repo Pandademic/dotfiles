@@ -1,11 +1,5 @@
 vim.cmd [[packadd packer.nvim]]
 
-require('packer').init({
-        display = {
-           non_interactive = true
-        }
-})
-
 return require('packer').startup(function()
     use { 'wbthomason/packer.nvim', opt=true }
     
