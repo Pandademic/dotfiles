@@ -16,3 +16,4 @@ return require('packer').startup(function()
      use 'tpope/vim-fugitive' -- git wrapping
         
      use 'lewis6991/impatient.nvim' -- also spped it up
+end)
