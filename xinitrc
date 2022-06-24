@@ -1,8 +1,2 @@
-#!/bin/sh
-#
-# ~/.xinitrc :
-
-
-exec picom &
-
-exec awesome 
+exec picom &>log/picom.log
+exec awesome
