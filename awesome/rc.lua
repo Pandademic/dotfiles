@@ -314,3 +314,5 @@ client.connect_signal("manage", function (c)
         awful.placement.no_offscreen(c)
     end
 end)
+
+beautiful.useless_gaps=7
