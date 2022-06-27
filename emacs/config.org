@@ -1,0 +1,248 @@
+-*- mode: org -*-
+#+title: Atha's emacs config
+#+author: atha Gupte
+* Configure =straight.el= 
+=Straight.el= is my goto pkg manager , and for it we need to
+- load =early-init.el=
+ In the strange case that early-init.el wasn't loadeded , e.g. this is called =Chemacs 1=? Or =emac >26=), we do it explicitly:
+#+BEGIN_SRC emacs-lisp
+    (load (concat (file-name-directory load-file-name) "early-init"))
+#+END_SRC
+- put custom file's elsewhere
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file (concat user-emacs-directory "custom.el"))
+  (load custom-file 'noerror)
+  ;; https://www.reddit.com/r/emacs/comments/mtb05k/emacs_init_time_decreased_65_after_i_realized_the/
+  ;;https://github.com/hlissner/doom-emacs/blob/1ebfa35b71625bf4cb5c01d98d0c582f09f40b67/core/core-packages.el#L87 ... And I don't
+   (setq straight-check-for-modifications nil)
+#+END_SRC
+- and bootstrap =straight=
+#+BEGIN_SRC emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+	  (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	 (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+	   (url-retrieve-synchronously
+	    "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	    'silent 'inhibit-cookies)
+	 (goto-char (point-max))
+	 (eval-print-last-sexp)))
+    (load bootstrap-file))
+
+  (setq straight-repository-branch "develop")
+  (straight-use-package 'use-package)
+#+END_SRC
+notice how we also immeaditly get =use-package=? I'm also a fan of that
+* General settings
+The GC eats up quite a bit of time, easily doubling startup time. The trick is to turn up the memory threshold as early as possible.
+#+BEGIN_SRC emacs-lisp 
+  (setq gc-cons-threshold 100000000)
+#+END_SRC
+I'll use my gh username later , sooo
+#+BEGIN_SRC emacs-lisp
+   (defconst me/github-username "pandademic"
+     "My username on github.")
+#+END_SRC
+I handle long things....
+#+BEGIN_SRC emacs-lisp
+   (global-so-long-mode)
+#+END_SRC
+There is a lot "stuff"
+*** TODO sort and fix this mess up
+#+BEGIN_SRC emacs-lisp
+  (make-directory "~/.emacs.d/autosaves/" t) ;; Ensuring I have an autosave
+   ;; directory.
+   (recentf-mode 1) ;; Track recent
+   (run-at-time nil (* 2 60) 'recentf-save-list) ;; Save files every 2 minutes
+   (global-auto-revert-mode)
+  (setq
+    backup-by-copying t         ;; Don't delink hardlinks
+
+    backup-directory-alist '((".*" . "~/.emacs.d/backups/"))
+
+    custom-safe-themes t        ;; I may as well trust themes.
+
+    create-lockfiles nil        ;; Don't create lock files.
+
+    delete-old-versions t       ;; Automatically delete excess backups
+
+    echo-key-strokes 0.2
+
+    idle-update-delay 1.1       ;; Slow down the UI being updated to improve
+				 ;; performance
+
+    indent-tabs-mode nil        ;; Ensure tabs are expanded, not inserted
+
+    inhibit-startup-screen t    ;; Don't include the  emacs "start" window
+
+    kept-new-versions 20        ;; how many of the newest versions to keep
+
+    kept-old-versions 5         ;; and how many of the old
+
+    kill-ring-max 120           ;; Set a generous kill ring size.
+
+    read-process-output-max (* 6 512 1024)  ;; Increase read size per process
+
+    recentf-max-menu-items 50
+
+    recentf-max-saved-items 50
+
+    ring-bell-function 'ignore  ;; Stop ringing any bell
+
+    vc-follow-symlinks t        ;; Follow symlinks instead of prompting.
+
+    version-control t           ;; Use version numbers on backups
+
+  )
+#+END_SRC
+Tell =straight= to use =use-package= by default , together they make a deadly pair
+#+BEGIN_SRC emacs-lisp
+  (setq straight-use-package-by-default t)
+#+END_SRC
+Disable the :
+- menu bar
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+#+END_SRC
+- the toolbar
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+#+END_SRC
+- and the scroll bar
+#+BEGIN_SRC emacs-lisp
+  (scroll-bar-mode -1)
+#+END_SRC
+I need to use a nerd font.It's a addiction.
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'default nil :family "LucidaConsole Nerd Font Mono") 
+#+END_SRC
+* Package time!
+I need evil-mode more than anything else
+#+BEGIN_SRC emacs-lisp
+  (use-package evil)
+  (evil-mode 1)
+#+END_SRC
+Oh and not supposed to be here but....
+
+#+BEGIN_SRC emacs-lisp
+  (defconst *sys/linux*
+    (eq system-type 'gnu/linux)
+    "Are we running on a GNU/Linux system?")
+
+  (defconst *sys/mac*
+    (eq system-type 'darwin)
+    "Are we running on a Mac system?")
+
+  (defconst *rg*
+    (executable-find "rg")
+    "Do we have ripgrep?")
+
+  (defconst *python*
+    (executable-find "python")
+    "Do we have python?")
+
+  (defconst *python3*
+    (executable-find "python3")
+    "Do we have python3?")
+
+
+  (defconst *gcc*
+    (executable-find "gcc")
+    "Do we have gcc?")
+
+  (defconst *git*
+    (executable-find "git")
+    "Do we have git?")
+
+#+END_SRC
+* Package time again!
+vertico for completion
+The settings are included too
+#+BEGIN_SRC emacs-lisp
+  (use-package vertico)
+
+  ;; Enable LSP support by default in programming buffers
+  (vertico-mode t)
+
+  ;; Improve directory navigation
+  (with-eval-after-load 'vertico
+    (define-key vertico-map (kbd "RET") #'vertico-directory-enter)
+    (define-key vertico-map (kbd "DEL") #'vertico-delete-word)
+    (define-key vertico-map (kbd "M-d") #'vertico-delete-char))
+#+END_SRC
+Extended completion utilities
+#+BEGIN_SRC emacs-lisp
+  (use-package consult)
+  (global-set-key [rebind switch-to-buffer] #'consult-buffer)
+  (global-set-key (kbd "C-c j") #'consult-line)
+  (global-set-key (kbd "C-c i") #'consult-imenu)
+#+END_SRC
+Automatically pair parentheses
+#+BEGIN_SRC emacs-lisp
+  (electric-pair-mode t)
+#+END_SRC
+LSP Support
+#+BEGIN_SRC emacs-lisp
+  (use-package eglot)
+  ;; Enable LSP support by default in programming buffers
+  (add-hook 'prog-mode-hook #'eglot-ensure)
+#+END_SRC
+Pop-up auto-completion
+#+BEGIN_SRC emacs-lisp
+  (use-package company)
+
+  ;; Enable Company by default in programming buffers
+  (add-hook 'prog-mode-hook #'company-mode)
+#+END_SRC
+progaming language support:
+#+BEGIN_SRC emacs-lisp
+  ;; Go Support !important
+  (use-package go-mode)
+
+  ;; NASM Support
+  (use-package nasm-mode)
+
+  ;; Rust Support
+  (use-package rust-mode)
+
+  ;; web Support
+  (use-package web-mode)
+
+  ;; Markdown support
+  (use-package markdown-mode)
+#+END_SRC
+editorconfig is a neccity.I use it everywhere
+#+BEGIN_SRC emacs-lisp
+  (use-package editorconfig
+    :ensure t
+    :config
+    (editorconfig-mode 1))
+#+END_SRC
+Enable CUA key bindings
+#+BEGIN_SRC emacs-lisp
+  (cua-mode t)
+#+END_SRC
+
+I have my own package of UI enhancements!
+
+#+BEGIN_SRC emacs-lisp
+  (straight-use-package
+  '(atha-emacs :type git :host github :repo "pandademic/atha-emacs"))
+  ;; set up atha-emacs
+  (setq atha-font-size 120)
+  (setq atha-show-toolbar nil)
+  (setq atha-show-menubar nil)
+  (setq atha-show-scrollbar nil)
+  (require 'atha-ui)
+#+END_SRC
+Gcmh does GC while the user is idle.I'm leave my laptop often enough , so this makes sense
+#+BEGIN_SRC emacs-lisp
+  (use-package gcmh
+    :init
+    (setq gcmh-idle-delay 5
+      gcmh-high-cons-threshold (* 16 1024 1024))  ; 16mb
+    :config (gcmh-mode)
+  )
+#+END_SRC
