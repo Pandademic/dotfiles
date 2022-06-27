@@ -1,0 +1,7 @@
+*** why is xinit not managed by tsdm?
+
+A: it will be , eventually
+
+*** why are all languages seen by github (=.gitattributes=)
+
+A: It's my preference , it gives me a better overview
