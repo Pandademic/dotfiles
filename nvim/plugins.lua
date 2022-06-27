@@ -9,5 +9,10 @@ return require('packer').startup(function()
             
      use 'tpope/vim-fugitive' -- git wrapping
         
-     use 'lewis6991/impatient.nvim' -- also spped it up
+     use 'lewis6991/impatient.nvim' -- also speed it up
+     
+    use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
+            require("toggleterm").setup()
+    end}
+        
 end)
