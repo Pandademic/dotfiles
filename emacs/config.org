@@ -1,9 +1,10 @@
 -*- mode: org -*-
-#+title: Atha's emacs config
-#+author: atha Gupte
+#+title: My emac config
+#+author: atha g.
+
 * Configure =straight.el= 
-=Straight.el= is my goto pkg manager , and for it we need to
-- load =early-init.el=
+=Straight.el= is my goto package manager , and for it we need to
+- load the =early-init.el=
  In the strange case that early-init.el wasn't loadeded , e.g. this is called =Chemacs 1=? Or =emac >26=), we do it explicitly:
 #+BEGIN_SRC emacs-lisp
     (load (concat (file-name-directory load-file-name) "early-init"))
@@ -34,16 +35,11 @@
   (setq straight-repository-branch "develop")
   (straight-use-package 'use-package)
 #+END_SRC
-notice how we also immeaditly get =use-package=? I'm also a fan of that
+I also tend to use =use-package= , so we install it right away.
 * General settings
 The GC eats up quite a bit of time, easily doubling startup time. The trick is to turn up the memory threshold as early as possible.
 #+BEGIN_SRC emacs-lisp 
   (setq gc-cons-threshold 100000000)
-#+END_SRC
-I'll use my gh username later , sooo
-#+BEGIN_SRC emacs-lisp
-   (defconst me/github-username "pandademic"
-     "My username on github.")
 #+END_SRC
 I handle long things....
 #+BEGIN_SRC emacs-lisp
@@ -97,12 +93,18 @@ There is a lot "stuff"
 
   )
 #+END_SRC
-Tell =straight= to use =use-package= by default , together they make a deadly pair
+Oh how the joy of emacs will increase when I clean that up.
+
+Not lookin' forward to it.
+
+Tell =straight= to use =use-package= by default , saves me some characters.
 #+BEGIN_SRC emacs-lisp
   (setq straight-use-package-by-default t)
 #+END_SRC
+
 Disable the :
 - menu bar
+(note: this is all done a later packages , this also needs further cleanup)
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode -1)
 #+END_SRC
