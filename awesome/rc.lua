@@ -33,7 +33,7 @@ require("awful.hotkeys_popup.keys")
 require("keybindings")
 
 -- Load Debian menu entries ( If they exist)
-local debian = pcall(require,"debian.menu")
+local has_debmen, debian = pcall(require,"debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 
@@ -104,7 +104,6 @@ else
     mymainmenu = awful.menu({
         items = {
                   menu_awesome,
-                  { "Debian", debian.menu.Debian_menu.Debian },
                   menu_terminal,
                 }
     })
