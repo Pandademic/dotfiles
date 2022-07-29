@@ -41,7 +41,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oh no! There were errors during startup!",
+                     title = "Houston , look here!",
                      text = awesome.startup_errors })
 end
 
@@ -67,7 +67,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 
-terminal = "x-terminal-emulator" -- idk , it runs st , sooo it works?
+terminal = "st"
 editor = os.getenv("EDITOR") or "nvim" or "vim" or "vi" or "nano" -- a lot of options for editor
 editor_cmd = terminal .. " -e " .. editor
 
