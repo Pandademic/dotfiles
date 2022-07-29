@@ -31,11 +31,11 @@ linux:
              location: ~/.config/emacs/early-init.el
      
      - emacs/init.el:
-             name: "init!"
+             name: "the real init!"
              location: ~/.config/emacs/init.el
       
      - emacs/config.org:
-             name: "early init!"
+             name: "the actual literate config"
              location: ~/.config/emacs/config.org
      
 # mac , which for the most part , is identical to linux
