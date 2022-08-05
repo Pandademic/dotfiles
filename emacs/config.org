@@ -240,7 +240,7 @@ Gcmh does GC while the user is idle.I'm leave my laptop often enough , so this m
 
 We should also load my custom theme - balloon!
 
-#BEGIN_SRC emacs-lisp
-(load-file "./balloon")
+#+BEGIN_SRC emacs-lisp
+(load-file "./balloon-theme.el")
 (load-theme 'balloon t)
-#END_SRC
+#+END_SRC
