@@ -44,7 +44,7 @@
        (comment "#908caa")
        (func    "#9ccfd8")
        (str     "#61D67E")
-       (type    "#D56CC3	")
+       (type    "#D56CC3")
        (var     "#f6c177")
        (warning "#DA5858")
        (warning2 "#ED9454"))
