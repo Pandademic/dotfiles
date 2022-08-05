@@ -1,4 +1,5 @@
-reqVer: 0.2
+# this is the TSDM config. It requires the in-development 0.2 version. It's perfectly fine for me though, as i'm the author of TSDM.
+reqVer: 0.2 
 
 linux:
   files:
@@ -27,7 +28,7 @@ linux:
         comment: "Note: I use the ibhagwan fork"
         
      - emacs/early-init.el:
-             name: "early init!"
+             name: "emacs early init!"
              location: ~/.config/emacs/early-init.el
      
      - emacs/init.el:
@@ -37,6 +38,10 @@ linux:
      - emacs/config.org:
              name: "the actual literate config"
              location: ~/.config/emacs/config.org
+             
+     - emacs/baloon-theme.el:
+              name: "the baloon theme"
+              location: ~/.config/emacs/baloon-theme.el
      
 # mac , which for the most part , is identical to linux
 
