@@ -102,20 +102,6 @@ Tell =straight= to use =use-package= by default , saves me some characters.
   (setq straight-use-package-by-default t)
 #+END_SRC
 
-Disable the :
-- menu bar
-(note: this is all done a later packages , this also needs further cleanup)
-#+BEGIN_SRC emacs-lisp
-  (menu-bar-mode -1)
-#+END_SRC
-- the toolbar
-#+BEGIN_SRC emacs-lisp
-  (tool-bar-mode -1)
-#+END_SRC
-- and the scroll bar
-#+BEGIN_SRC emacs-lisp
-  (scroll-bar-mode -1)
-#+END_SRC
 I need to use a nerd font.It's a addiction.
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil :family "LucidaConsole Nerd Font Mono") 
@@ -227,18 +213,21 @@ Enable CUA key bindings
   (cua-mode t)
 #+END_SRC
 
-I have my own package of UI enhancements!
+Disable the :
+- menu bar
 
 #+BEGIN_SRC emacs-lisp
-  (straight-use-package
-  '(atha-emacs :type git :host github :repo "pandademic/atha-emacs"))
-  ;; set up atha-emacs
-  (setq atha-font-size 120)
-  (setq atha-show-toolbar nil)
-  (setq atha-show-menubar nil)
-  (setq atha-show-scrollbar nil)
-  (require 'atha-ui)
+  (menu-bar-mode -1)
 #+END_SRC
+- the toolbar
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+#+END_SRC
+- and the scroll bar
+#+BEGIN_SRC emacs-lisp
+  (scroll-bar-mode -1)
+#+END_SRC
+
 Gcmh does GC while the user is idle.I'm leave my laptop often enough , so this makes sense
 #+BEGIN_SRC emacs-lisp
   (use-package gcmh
@@ -248,3 +237,10 @@ Gcmh does GC while the user is idle.I'm leave my laptop often enough , so this m
     :config (gcmh-mode)
   )
 #+END_SRC
+
+We should also load my custom theme - balloon!
+
+#BEGIN_SRC emacs-lisp
+(load-file "./balloon")
+(load-theme 'balloon t)
+#END_SRC
