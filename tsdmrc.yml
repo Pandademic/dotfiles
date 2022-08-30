@@ -1,4 +1,5 @@
 # this is the TSDM config. It requires the in-development 0.2 version. It's perfectly fine for me though, as i'm the author of TSDM.
+
 reqVer: 0.2 
 
 linux:
@@ -13,16 +14,16 @@ linux:
         location: ~/.config/nvim/lua/plugins.lua
         comment: "This maks packer.nvim look cooler"
         
-     - awesome/rc.lua:
+     - pie/awesome/rc.lua:
         name: "main awesome rc file"
         location: ~/.config/awesome/rc.lua
         comment: "My main config for awesomewm , which requires some prequisistes"
         
-     - awesome/keybindings.lua:  
+     - pie/awesome/keybindings.lua:  
         name: "awesome keybindings file"
         location: ~/.config/awesome/keybindings.lua
         
-     - picom.conf:
+     - pie/picom.conf:
         name: "Picom config"
         location: ~/.config/picom.conf
         comment: "Note: I use the ibhagwan fork"

@@ -1,0 +1,26 @@
+control + space
+	rofi -show run
+
+control + alt + r
+	pkill -USR1 -x sxhkd
+
+super + shift + {q,r}
+	bspc {quit,wm -r}
+
+super + {_,shift + } Return
+	{kitty, bspc node -s biggest.local}
+
+super + {_,shift + } q
+	bspc node -{k,c}
+
+super + {t,ctrl + t,l,f}
+	bspc node -t {tiled,psuedo_tiled,floating,fullscreen}
+
+super + shift  + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+alt + {_,shift +}{1-9,0}
+	bspc {desktop -f, node -d} '^{1-9,10}'
+
+super + shift + {up,down,left,right}
+	bspc node -f {north,south,west,east} 

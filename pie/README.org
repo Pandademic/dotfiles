@@ -1,3 +1,7 @@
 * What's this?
 
 this is the dotfiles for my raspberry pi 400, "pie"
+
+** Xinit ?
+
+very manual,thanks
